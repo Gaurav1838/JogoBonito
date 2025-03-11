@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOGO BONITO - Cart</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="Assets/logo.png" alt="JOGO BONITO" height="40" class="me-2">
+                <span class="text-white fw-bold">JOGO BONITO</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="cart.html">Cart</a></li>
+                    <li class="nav-item ms-auto"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Your Cart</h2>
+        <div id="cart-items" class="row"></div>
+        <h4 class="text-end mt-3">Total: ₹<span id="totalPrice">0</span></h4>
+        <button class="btn btn-success w-100 mt-3" id="checkoutBtn">Checkout</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 JOGO BONITO. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let cartItemsContainer = document.getElementById("cart-items");
+            let totalPrice = 0;
+
+            cartItemsContainer.innerHTML = "";
+            cart.forEach((item, index) => {
+                totalPrice += parseInt(item.price);
+                let itemCard = document.createElement("div");
+                itemCard.classList.add("col-md-4", "mb-3");
+                itemCard.innerHTML = `
+                    <div class="card">
+                        <img src="${item.image}" class="card-img-top" alt="${item.name}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${item.name}</h5>
+                            <p class="card-text">Size: ${item.size}</p>
+                            <p class="card-text">₹${item.price}</p>
+                            <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remove</button>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemCard);
+            });
+
+            document.getElementById("totalPrice").textContent = totalPrice;
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+        }
+
+        document.getElementById("checkoutBtn").addEventListener("click", function() {
+            alert("Proceeding to checkout...");
+            localStorage.removeItem("cart");
+            loadCart();
+        });
+
+        loadCart();
+    </script>
+</body>
+</html>

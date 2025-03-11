@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOGO BONITO - Shop</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .product-card {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+        .modal-img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="Assets/logo.png" alt="JOGO BONITO" height="40" class="me-2">
+                <span class="text-white fw-bold">JOGO BONITO</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
+                    <li class="nav-item ms-auto"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shop Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Shop Jerseys</h2>
+        <div class="row" id="product-list">
+            <!-- Jerseys will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalImage" class="modal-img mb-3" src="" alt="Jersey">
+                    <p><strong>Club:</strong> <span id="modalClub"></span></p>
+                    <p><strong>Year:</strong> <span id="modalYear"></span></p>
+                    <p><strong>Price:</strong> ₹<span id="modalPrice"></span></p>
+                    <label for="sizeSelect" class="form-label">Choose Size:</label>
+                    <select id="sizeSelect" class="form-select mb-3">
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+                    </select>
+                    <button class="btn btn-primary w-100">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 JOGO BONITO. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const jerseys = [
+            { name: "Real Madrid Home Kit", club: "Real Madrid", year: "2024-25", price: "1699", image: "Assets/rm-24-25-home.jpeg" },
+            { name: "Barcelona Away Kit", club: "Barcelona", year: "2024-25", price: "1699", image: "Assets/barca-24-25-away.jpeg" },
+            { name: "Manchester United Home Kit", club: "Manchester United", year: "2021-22", price: "1599", image: "Assets/manu-21-22-home.jpeg" },
+            { name: "Liverpool Home Kit", club: "Liverpool", year: "2024-25", price: "1699", image: "Assets/liver-24-25-home.jpeg" },
+            { name: "AC Milan Home Kit", club: "AC Milan", year: "2013-14", price: "1999", image: "Assets/ac-13-14-home.jpeg" },
+            { name: "Juventus Home Kit", club: "Juventus", year: "2023-34", price: "1899", image: "Assets/juve-23-24-home.jpeg" },
+            { name: "PSG Home Kit", club: "Paris Saint-Germain", year: "2021-22", price: "1799", image: "Assets/psg-21-22-home.jpeg" },
+            { name: "Real Madrid Away Kit", club: "Real Madrid", year: "2016-17", price: "1999", image: "Assets/rm-2016-17-away.jpeg" },
+            { name: "Manchester United Home Kit", club: "Manchester United", year: "2007-08", price: "1999", image: "Assets/manu-07-08-home.jpeg" },
+            { name: "Argentina International Kit", club: "Argentina", year: "2022", price: "1599", image: "Assets/arg-2022-wc.jpeg" },
+            { name: "Germany International Kit", club: "Germany", year: "2024", price: "1599", image: "Assets/ger-euro-24.jpeg" },
+            { name: "Brazil International Kit", club: "Brazil", year: "2022", price: "1599", image: "Assets/brazil-22-wc.jpeg" }
+        ];
+
+        const productList = document.getElementById("product-list");
+
+        jerseys.forEach((jersey, index) => {
+            const productCard = document.createElement("div");
+            productCard.classList.add("col-md-4", "mb-4");
+            productCard.innerHTML = `
+                <div class="card product-card" data-index="${index}" data-bs-toggle="modal" data-bs-target="#productModal">
+                    <img src="${jersey.image}" class="card-img-top" alt="${jersey.name}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">${jersey.name}</h5>
+                        <p class="card-text">₹${jersey.price}</p>
+                    </div>
+                </div>
+            `;
+            productList.appendChild(productCard);
+        });
+
+        document.querySelectorAll(".product-card").forEach(card => {
+            card.addEventListener("click", function() {
+                const index = this.getAttribute("data-index");
+                const jersey = jerseys[index];
+                document.getElementById("productModalLabel").textContent = jersey.name;
+                document.getElementById("modalClub").textContent = jersey.club;
+                document.getElementById("modalYear").textContent = jersey.year;
+                document.getElementById("modalPrice").textContent = jersey.price;
+                document.getElementById("modalImage").src = jersey.image;
+            });
+        });
+    </script>
+</body>
+</html>
