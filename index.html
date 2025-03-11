@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOGO BONITO - Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .carousel-item img {
+            max-height: 700px;
+            object-fit: cover;
+        }
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            filter: invert(100%);
+        }
+        .navbar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="Assets/logo.png" alt="JOGO BONITO" height="40" class="me-2">
+                <span class="text-white fw-bold">JOGO BONITO</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
+                    <li class="nav-item ms-auto"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Slogan -->
+    <section class="bg-light text-center py-4">
+        <h3 class="fw-bold">PLAY AND WEAR STYLE</h3>
+    </section>
+
+    <!-- Image Carousel Section -->
+    <div id="carouselExample" class="carousel slide container my-5" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="Assets/jersey1.jpeg" class="d-block w-100" alt="Jersey 1">
+            </div>
+            <div class="carousel-item">
+                <img src="Assets/jersey2.jpg" class="d-block w-100" alt="Jersey 2">
+            </div>
+            <div class="carousel-item">
+                <img src="Assets/jersey3.jpeg" class="d-block w-100" alt="Jersey 3">
+            </div>
+            <div class="carousel-item">
+                <img src="Assets/jersey4.jpeg" class="d-block w-100" alt="Jersey 4">
+            </div>
+            <div class="carousel-item">
+                <img src="Assets/jersey5.jpeg" class="d-block w-100" alt="Jersey 5">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Main Content for Home Page -->
+    <div class="container my-5 text-center">
+        <h2>Welcome to JOGO BONITO</h2>
+        <p>Find the best football jerseys for your favorite teams.</p>
+        <a href="shop.html" class="btn btn-primary">Start Shopping</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 JOGO BONITO. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
