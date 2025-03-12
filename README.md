@@ -1,2 +1,2 @@
 # JogoBonito
-Football jersey store
+Football Jersey Store
