@@ -70,7 +70,7 @@
                         <option>L</option>
                         <option>XL</option>
                     </select>
-                    <button class="btn btn-primary w-100">Add to Cart</button>
+                    <button id="modalAddToCart" class="btn btn-primary">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -116,16 +116,37 @@
         });
 
         document.querySelectorAll(".product-card").forEach(card => {
-            card.addEventListener("click", function() {
+             card.addEventListener("click", function() {
                 const index = this.getAttribute("data-index");
                 const jersey = jerseys[index];
+
                 document.getElementById("productModalLabel").textContent = jersey.name;
                 document.getElementById("modalClub").textContent = jersey.club;
                 document.getElementById("modalYear").textContent = jersey.year;
                 document.getElementById("modalPrice").textContent = jersey.price;
                 document.getElementById("modalImage").src = jersey.image;
-            });
-        });
+
+                // Update "Add to Cart" button with correct product info
+                const addToCartBtn = document.getElementById("modalAddToCart");
+                addToCartBtn.onclick = function () {
+                    let size = document.getElementById("sizeSelect").value;
+                    let product = {
+                        name: jersey.name,
+                        price: jersey.price,
+                        size: size,
+                        image: jersey.image
+                    };
+
+                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    cart.push(product);
+                    localStorage.setItem("cart", JSON.stringify(cart));
+
+                    alert(`${jersey.name} (Size: ${size}) added to cart!`);
+        };
+    });
+});
+
+
     </script>
 </body>
 </html>
